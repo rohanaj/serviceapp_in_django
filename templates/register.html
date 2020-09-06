@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Index Page</title>
+    <meta charset="UTF-8">
+    <title>Superadmin dashboard</title>
+    <meta name="description" content="Thanks for purchasing Huge. If you need any support, please contact with us.">
+    <meta name="author" content="lucidtemplate">
+    <meta name="copyright" content="lucidtemplate">
+    <link rel="shortcut icon" type="image/png" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/tree-viewer.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+    input[type=text], .form-control{
+margin-bottom: 10px;
+
+ }
+</style>
+    <script>
+        {% if error is not None%}
+        alert('{{error}}');
+        {% endif %}
+    </script>
+    <script>
+    function click1(){
+        password1 = document.getElementById("password").value;
+        password2 =  document.getElementById("password2").value;
+        if (password1 != password2){
+           alert("The two passwords Dont match");
+        }
+
+        }
+    </script>
+</head>
+<body>
+<div class="container">
+<form action="{%url 'processregister'%}" method="post">
+		<div style="margin-top:50px;text-align:center;background-color:#4CAF50;">
+			<h2>Registration  Form</h2>
+		</div>
+
+
+
+             <div class="col-xs-8 col-xs-offset-2" style="text-align:center;margin-top:100px;">
+		<div class="form-group">
+			<label class=" col-xs-4" >Username</label>
+			<div class="col-xs-8">
+                <input type ="text" class="form-control" name="username" required>
+            </div>
+            </div><br>
+
+
+
+		<div class="form-group">
+			<label class="col-xs-4">Email</label>
+			<div class="col-xs-8">
+                <input type="email" class="form-control" name="email" required="required">
+            </div>
+        </div>
+                 <div class="form-group">
+			<label class="col-xs-4">Phone Number</label>
+			<div class="col-xs-8">
+                <input type="phone" class="form-control" name="phone" required="required" maxlength="10" pattern="[6-9][0-9]{9}">
+            </div>
+        </div>
+        <div class="form-group">
+			<label class="col-xs-4">Password</label>
+			<div class="col-xs-8">
+                <input type="password" class="form-control" name="password" id="password" required="required">
+            </div>
+        </div><br>
+    <div class="form-group">
+			<label class="col-xs-4">Repeat Password</label>
+			<div class="col-xs-8">
+                <input type="password" class="form-control" name="password2" id="password2" required="required">
+            </div>
+        </div><br>
+        <div class="form-group">
+			<div class="col-xs-8 col-xs-offset-4">
+
+                <input type="submit" value="Submit" onclick="click1();">
+
+
+			</div>
+            </div>
+		</div>
+
+</form>
+ </div>
+<script src="/static/js/jquery-3.1.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+	<script src="/static/js/jstree.min.js"></script>
+    <script src="/static/js/jstree.active.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Index Page</title>
+    <meta charset="UTF-8">
+    <title>Superadmin dashboard</title>
+    <meta name="description" content="Thanks for purchasing Huge. If you need any support, please contact with us.">
+    <meta name="author" content="lucidtemplate">
+    <meta name="copyright" content="lucidtemplate">
+    <link rel="shortcut icon" type="image/png" href="/static/img/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/tree-viewer.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+    input[type=text], .form-control{
+margin-bottom: 10px;
+
+ }
+</style>
+    <script>
+    {% if request.session.success is not None%}
+        alert('{{success}}');
+        {% endif %}
+        {% if request.session.message is not None%}
+        alert('{{message}}');
+        {% endif %}
+    </script>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div class="left-side">
+            <div style="margin-bottom:25px;text-align:center;">
+                <h3 style="color:white; margin-top:20px;text-align:center;">Welcome {{request.session.email1}}</h3>
+            </div>
+            <div class="left-content">
+                <ul role="tablist">
+                    {% if user.is_staff %}
+
+                     <li role="presentation"><a href="{% url 'updaterequestform' %}" ><span><i class="fa fa-support"></i></span>All Requests</a></li>
+                    <li role="presentation"><a href="{% url 'logout' %}" ><span><i class="fa fa-support"></i></span>Logout</a></li>
+                    {% else %}
+                    <li role="presentation"><a href="{% url 'newrequestform' %}" ><span><i class="fa fa-support"></i></span>New Request</a></li>
+                     <li role="presentation"><a href="{% url 'updaterequestform' %}" ><span><i class="fa fa-support"></i></span>All Requests</a></li>
+                    <li role="presentation"><a href="{% url 'logout' %}" ><span><i class="fa fa-support"></i></span>Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="copyright">
+                <p style="text-align:center;">Copyright &#169; 2020 </p>
+            </div>
+        </div>
+        <div style="background-color:light-blue;">
+        <div class="right-side" >
+
+            <div class="right-content">
+
+
+    <table class="table table-striped">
+        <thead>
+        <th style="background-color:#4CAF50;">Request ID</th>
+        <th style="background-color:#4CAF50;">Request Type</th>
+        <th style="background-color:#4CAF50;">Request Description</th>
+        <th style="background-color:#4CAF50;">Request Date</th>
+        <th style="background-color:#4CAF50;">Request Status</th>
+        {% if user.is_staff %}
+        <th style="background-color:#4CAF50;">View/Edit</th>
+         {% endif %}
+
+        </thead>
+
+        <tbody>
+
+        {% for i in r1 %}
+
+        <tr>
+            <form action="http://127.0.0.1:8000/updaterequestsingle/{{i.id}}" method="post">
+            <input type="hidden" name="id" value="{{i.id}}">
+
+            <input type="hidden" id="requesttype" name="requesttype" value="{% for type in i.requesttype.all %} {{type}}{% endfor %}">
+             <input type="hidden" id ="updatedby" name="updatedby" value="{{i.updated_by}}">
+            <input type="hidden" name="requestdesc" value="{{i.requestdesc}}">
+            <input type="hidden" name="pincode" value="{{i.pincode}}">
+            <input type="hidden" name="city" value="{{i.city}}">
+            <input type="hidden" name="state" value="{{i.state}}">
+            <input type="hidden" name="countrycode" value="{{i.countrycode}}">
+            <input type="hidden" name="phone_number" value="{{i.phone_number}}">
+            <input type="hidden" name="status" value="{{i.status}}">
+<input type="hidden" name="remarks" value="{{i.remarks}}">
+            <td>{{i.id}}</td>
+            <td id="rt"> {% for type in i.requesttype.all %}
+            {{type}}{% endfor %}</td>
+                <script>
+                    document.getElementById("requesttype").value = document.getElementById("rt").innerHTML;
+                </script>
+            <td>{{i.requestdesc}}</td>
+            <td>{{i.created_at}}</td>
+            <td>{{i.status}}</td>
+                {% if user.is_staff %}
+            <td><input type="submit" value="View/Edit"></td>
+                {% endif %}
+                </form>
+        </tr>
+
+        {% endfor %}
+        </tbody>
+    </table>
+            </div>
+        </div>
+        </div>
+</body>
+</html>
