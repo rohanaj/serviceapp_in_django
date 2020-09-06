@@ -20,7 +20,7 @@ STATICFILES_DIRS =(BASE_DIR+"/frontend/static/",)
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%qs#k#_l8q2n_5)6*n7y1crqa=#b(+n^p58xz(q9@_3oxx7rr('
+SECRET_KEY = 'abc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
